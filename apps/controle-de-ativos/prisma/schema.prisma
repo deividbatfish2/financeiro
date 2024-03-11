@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id  String  @id @db.Uuid
+  cpf String @unique
+  email String @unique
+  hash String
+  nome String
+  lancamentos Lancamento[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum TipoLancamento {
+  COMPRA
+  VENDA
+}
+
+model Lancamento {
+  id  String  @id @db.Uuid
+  usuarioId String @db.Uuid
+  usuario Usuario @relation(fields: [usuarioId], references: [id])
+  codigo String
+  data  DateTime @default(now())
+  valor BigInt
+  quantidade BigInt
+  tipo TipoLancamento
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

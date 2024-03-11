@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  database:
+    image: postgres:16
+    restart: always
+    container_name: integration-test-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=ControleDeAtivosAppUser
+      - POSTGRES_PASSWORD=MY_STRONG_PASSWORD_
+      - POSTGRES_DB=controle-de-ativos

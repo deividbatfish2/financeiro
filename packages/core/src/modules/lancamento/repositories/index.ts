@@ -1,0 +1,1 @@
+export type { LancamentoRepository } from './lancamento-repository'
